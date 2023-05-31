@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/layer/layer.js" ></script>
+    <script type="text/javascript" src="js/layer/common.js" ></script>
+</head>
+<body>
+<button id="test1">普通消息</button>
+<button id="test2">自定义对话框</button>
+<button id="test3">页面加载</button>
+<button id="test4">小提示</button>
+<button id="test5">信息框</button>
+<button id="test6">询问框</button>
+<button id="test7">询问框</button>
+
+</body>
+<script type="text/javascript">
+    //弹出一个提示层
+    $('#test1').on('click', function(){
+        layer.msg('hello');
+    });
+    //弹出一个页面层
+    $('#test2').on('click', function(){
+        layer.open({
+            type: 1,
+            area: ['600px', '360px'],
+            shadeClose: true, //点击遮罩关闭
+            content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+        });
+    });
+
+    //弹出一个loading层
+    $('#test3').on('click', function(){
+        var ii = layer.load();
+        //此处用setTimeout演示ajax的回调
+        setTimeout(function(){
+            layer.close(ii);
+        }, 1000);
+    });
+    //弹出一个tips层
+    $('#test4').on('click', function(){
+        layer.tips('Hello tips!', '#test4');
+    });
+
+    $("#test5").on("click", function () {
+        //信息框
+        layer.open({
+            content: '尚硅谷：只要学不死，就往死里学'
+            , btn: '我知道了'
+        });
+    });
+
+
+
+    $("#test6").on("click", function () {
+        //询问框
+        layer.open({
+            content: '您确定要刷新一下本页面吗？'
+            , btn: ['刷新', '不要']
+            , yes: function (index) {
+                location.reload();
+                layer.close(index);
+            }
+        });
+    });
+
+
+
+    $("#test7").on("click", function () {
+
+        layer.confirm("询问信息",  {icon: 3, title:'提示'}, function(cindex){
+            layer.close(cindex);
+        }, function(cindex){
+            layer.close(cindex);
+        });
+
+    });
+
+</script>
+</html>
